@@ -1,6 +1,8 @@
 import libdbcc
+import libdb
+import ledcontrol
 
 
-j = []
-print(len(j))
 print(libdbcc.findemptiestcc())
+
+ledcontrol.grid(3,4)

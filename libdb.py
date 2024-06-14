@@ -78,20 +78,25 @@ def search(thing):
 
 def remove(thing):
     fullsearch = search(thing)
+    print(fullsearch)
     matches = fullsearch[0], fullsearch[1]
     # partial = fullsearch[1]
     # matchespos = fullsearch[2]
     # partialpos = fullsearch[3]
 
-    if thing in fullsearch[3]:
-        theval = matches[3]
+
+    if thing == fullsearch[2]:
+        theval = fullsearch[2]
+    else:
+        return -1, -1
 
     items = getdb()
     # print(thepos)
     # print(theval)
     p1 = int(matches[0])
     p2 = int(matches[1])
-    items[p2][p1].remove(theval)
+    print(items[p1][p2])
+    items[p1][p2].remove(theval)
     writedb(items)
     return p1, p2
 
@@ -109,7 +114,7 @@ def add(thing):
     # theval = fullsearch[2]
 
     if thing in fullsearch[2]:
-        theval = matches[2]
+        theval = fullsearch[2]
         postowrite = matches
     elif partial != []:
         theval = partial[0]

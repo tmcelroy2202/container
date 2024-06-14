@@ -62,7 +62,7 @@ while(True):
         else:
             subprocess.run(["espeak", "-v", "en", "searched successfully"], check=True)
 
-    if action == "add":
+    if action == "add" or action == "plus" or action == "insert":
         emptycon = libdb.findemptiest()
         conarr = libdb.getdb()
         emptycc = libdbcc.findemptiestcc()

@@ -54,11 +54,11 @@ def findemptiestcc():
     itemnames = getdbcc()
     min = 3030303
     mindex = (-1,-1)
-    for y in range(len(itemnames)):
-        for x in range(len(itemnames[y])):
-            if len(itemnames[y][x]) < min:
-                mindex = (y,x)
-                min = len(itemnames[y][x])
+    for x in range(len(itemnames)):
+        for y in range(len(itemnames[x])):
+            if len(itemnames[x][y]) < min:
+                mindex = (x,y)
+                min = len(itemnames[x][y])
     return mindex
 
 def searchcc(thing):
@@ -85,6 +85,7 @@ def searchcc(thing):
     return matches,partial,matchespos,partialpos
 
 def removecc(thing):
+    print(thing)
     fullsearch = searchcc(thing)
     matches = fullsearch[0]
     partial = fullsearch[1]
@@ -97,6 +98,8 @@ def removecc(thing):
     elif partial != []:
         theval = partial[0]
         thepos = partialpos[0]
+    else:
+        return -1, -1
 
     items = getdbcc()
     print(thepos)
@@ -126,6 +129,7 @@ def addcc(thing):
     print('partial', partial)
     print('posmatches', matchespos)
     print('pospartial', partialpos)
+    thepos = "j"
 
     if thing in fullsearch[0]:
         theval = matches[0]
@@ -134,15 +138,24 @@ def addcc(thing):
         theval = partial[0]
         thepos = partialpos[0]
     else:
-        thepos = findemptiestcc()
+        thepose = findemptiestcc()
 
-    print(thepos)
-    pos = getdbcoordcc(thepos[0], thepos[1])
-    print(pos)
-    pos.append(thing)
-    print(pos)
-    writetodbcoordcc(pos,thepos[0],thepos[1])
-    return thepos[0], thepos[1]
+    if thepos != "j":
+        print(thepos)
+        pos = getdbcoordcc(thepos[0], thepos[1])
+        print(pos)
+        pos.append(thing)
+        print(pos)
+        writetodbcoordcc(pos,thepos[0],thepos[1])
+        return thepos[0], thepos[1]
+    else:
+        print(thepose)
+        pos = getdbcoordcc(thepose[1], thepose[0])
+        print(pos)
+        pos.append(thing)
+        print(pos)
+        writetodbcoordcc(pos,thepose[1],thepose[0])
+        return thepose[1], thepose[0]
         
         
 
