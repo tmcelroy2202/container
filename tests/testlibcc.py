@@ -294,3 +294,5 @@ if libdbcc.getdbcoord(0,1) != ['flash drive', 'flash drive', 'flash drive', 'fla
     print('wrong position')
     print(libdbcc.getdbcoord(2,1))
     print(matches)
+
+reset()

@@ -279,7 +279,7 @@ if libdb.remove("ziploc bags") != (1,5):
 if libdb.getdbcoord(1,5) != []:
     print("test failed: remove('ziploc bags' does not remove ziploc bags correctly)")
 
-
+reset()
 # print(libdb.add(1030330))
 # print(libdb.search('1030330'))
 
