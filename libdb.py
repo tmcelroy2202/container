@@ -81,7 +81,7 @@ def findemptiest():
                 # print(len(itemnames[y][x]))
                 # print(min)
                 # print(itemnames[y][x])
-                mindex = (y,x)
+                mindex = (x,y)
                 min = len(itemnames[y][x])
     return mindex
 
@@ -150,19 +150,19 @@ def add(thing):
     matches = fullsearch[0], fullsearch[1]
     # theval = fullsearch[2]
 
-    if thing in fullsearch[2]:
+    if fullsearch[2] != -1:
         theval = fullsearch[2]
         postowrite = matches
-    elif partial != []:
-        theval = partial[0]
-        thepos = partialpos[0]
-        postowrite = matches
+        print("fuck fuck fuck")
     else:
         postowrite = findemptiest()
 
-    pos = getdbcoord(fullsearch[0],fullsearch[1])
+    print(fullsearch[2])
+    print(postowrite)
+    pos = getdbcoord(postowrite[0],postowrite[1])
+    print(pos)
     pos.append(thing)
-    writetodbcoord(pos,fullsearch[0],fullsearch[1])
+    writetodbcoord(pos,postowrite[0],postowrite[1])
     return fullsearch[0], fullsearch[1]
 
     

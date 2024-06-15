@@ -34,6 +34,37 @@ def turnalldark(upperonly = False):
 
     response = requests.request("POST", url, headers=headers, data=json.dumps(payload))
 
+def turnallwhite(upperonly = False):
+    numseg = 31
+    skipseg = [16,8]
+    payload = {
+        "seg": []
+    }
+
+    if upperonly == False:
+        for i in range(numseg):
+            payload["seg"].append({
+                "id": i,
+                "col": [
+                    [255, 255, 255]
+                ]
+            })
+    elif upperonly == True:
+        for i in range(numseg-14):
+            payload["seg"].append({
+                "id": i+16,
+                "col": [
+                    [255, 255, 255]
+                ]
+            })
+
+    url = "http://192.168.1.204/json/state"
+    headers = {
+        'Content-Type': 'application/json'
+    }
+
+    response = requests.request("POST", url, headers=headers, data=json.dumps(payload))
+
 
 # turnalldark()
 
@@ -77,23 +108,25 @@ def grid(x, y, color="green"):
     else:
     # if ( x > )
         turnalldark()
-        if x <= 3:
-            changeid(x+9,color)
-            changeid(y,color)
+        if y <= 3:
+            changeid(x,color)
+            changeid(y+9,color)
+            # changeid(x+9,color)
+            # changeid(y,color)
         else:
-            if y == 1:
-                y = 4 
-            if y == 2:
-                x = 5 
-                y = 0
-            if y == 3:
-                x = 5
-                y = 4
-            changeid(x+9,color)
-            changeid(y,color)
-            changeid(y+1,color)
-            changeid(y+2,color)
-            changeid(y+3,color)
+            if x == 1:
+                x = 4 
+            if x == 2:
+                y = 5 
+                x = 0
+            if x == 3:
+                y = 5
+                x = 4
+            changeid(y+9,color)
+            changeid(x,color)
+            changeid(x+1,color)
+            changeid(x+2,color)
+            changeid(x+3,color)
 
 def highlight(x,y, color='green', found=True):
     if x == -1 and y == -1:

@@ -21,13 +21,13 @@ def getcommand(file_path):
     f = open(file_path)
     content = f.read()
     if content == "":
-        return None
+        return -1
 
     if "container" in content:
         index = content.find("container")
         content = content[index:]
     else:
-        return None
+        return -1
 
     if "done" in content:
         index = content.find("done")
