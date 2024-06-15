@@ -3,14 +3,14 @@ import json
 import sys
 
 
-def turnalldark(upperonly = False):
+def turnalldark(dark = "all"):
     numseg = 31
     skipseg = [16,8]
     payload = {
         "seg": []
     }
 
-    if upperonly == False:
+    if dark == "all":
         for i in range(numseg):
             payload["seg"].append({
                 "id": i,
@@ -18,7 +18,7 @@ def turnalldark(upperonly = False):
                     [0, 0, 0]
                 ]
             })
-    elif upperonly == True:
+    elif dark == "up":
         for i in range(numseg-14):
             payload["seg"].append({
                 "id": i+16,
@@ -27,21 +27,22 @@ def turnalldark(upperonly = False):
                 ]
             })
 
-    url = "http://192.168.1.204/json/state"
-    headers = {
-        'Content-Type': 'application/json'
-    }
+    if dark != "none":
+        url = "http://192.168.1.204/json/state"
+        headers = {
+            'Content-Type': 'application/json'
+        }
 
-    response = requests.request("POST", url, headers=headers, data=json.dumps(payload))
+        response = requests.request("POST", url, headers=headers, data=json.dumps(payload))
 
-def turnallwhite(upperonly = False):
+def turnallwhite(dark = "all"):
     numseg = 31
     skipseg = [16,8]
     payload = {
         "seg": []
     }
 
-    if upperonly == False:
+    if dark == "all":
         for i in range(numseg):
             payload["seg"].append({
                 "id": i,
@@ -49,7 +50,7 @@ def turnallwhite(upperonly = False):
                     [255, 255, 255]
                 ]
             })
-    elif upperonly == True:
+    elif dark == "up":
         for i in range(numseg-14):
             payload["seg"].append({
                 "id": i+16,
@@ -58,12 +59,13 @@ def turnallwhite(upperonly = False):
                 ]
             })
 
-    url = "http://192.168.1.204/json/state"
-    headers = {
-        'Content-Type': 'application/json'
-    }
+    if dark !="none":
+        url = "http://192.168.1.204/json/state"
+        headers = {
+            'Content-Type': 'application/json'
+        }
 
-    response = requests.request("POST", url, headers=headers, data=json.dumps(payload))
+        response = requests.request("POST", url, headers=headers, data=json.dumps(payload))
 
 
 # turnalldark()

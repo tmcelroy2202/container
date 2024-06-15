@@ -153,14 +153,10 @@ def add(thing):
     if fullsearch[2] != -1:
         theval = fullsearch[2]
         postowrite = matches
-        print("fuck fuck fuck")
     else:
         postowrite = findemptiest()
 
-    print(fullsearch[2])
-    print(postowrite)
     pos = getdbcoord(postowrite[0],postowrite[1])
-    print(pos)
     pos.append(thing)
     writetodbcoord(pos,postowrite[0],postowrite[1])
     return fullsearch[0], fullsearch[1]

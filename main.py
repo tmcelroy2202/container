@@ -6,7 +6,7 @@ import time
 import subprocess
 
 while(True):
-    file_path = "balls.txt"
+    file_path = "inputs.txt"
     if bridgeutils.morethan3sec(file_path):
         ourcommand = bridgeutils.getcommand(file_path)
         if ourcommand == -1:
@@ -22,6 +22,8 @@ while(True):
         ledcontrol.turnalldark()
     
     thing = ourcommand[ourcommand.index(action)+len(action):].strip()
+    if thing == "esp 32":
+        thing = "esp32"
 
     if thing == "":
         time.sleep(1)
@@ -49,15 +51,30 @@ while(True):
         matchespos = fullsearch[2]
         partialpos = fullsearch[3]
         foundup = False
+        onedone = False
 
         for coord in matchespos:
+            if found == False:
+                dark = "all"
+            if onedone == False and found == True:
+                dark = "up"
+            else: 
+                dark = "none"
             ledcontrol.highlight(coord[0], coord[1], "green", found)
             print("true match:", coord)
             foundup = True
+            onedone = True
         for coord in partialpos:
+            if found == False:
+                dark = "all"
+            if onedone == False:
+                dark = "up"
+            else: 
+                dark = "none"
             ledcontrol.highlight(coord[0], coord[1], "yellow", found)
             print("partial match:", coord)
             foundup = True
+            onedone = True
         if found == False and foundup == False:
             ledcontrol.turnalldark(False)
             subprocess.run(["espeak", "-v", "en", "item not found"], check=True)
@@ -71,7 +88,6 @@ while(True):
         concc = libdbcc.getdbcoord(emptycc[0], emptycc[1])
         currdb = libdb.search(thing)
         curcc = libdbcc.search(thing)
-        print('heyu')
 
         if currdb[0] == -1 and currdb[1] == -1 and curcc[0] == [] and curcc[1] == []:
             if len(conarr) < len(concc):
