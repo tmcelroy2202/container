@@ -8,11 +8,11 @@ import subprocess
     # returns position of an item in the array, tuple with x and y 
 ## findemptiest()
     # returns the emptiest slot in the array, just the one with the least items in it 
-# add(thing)
+## add(thing)
     # adds a given item to the array, at the emptiest spot.
 ## remove(thing)
     # removes a given item from the array, at the first spot it finds the item.
-# removepos(thing,x,y)
+## removepos(thing,x,y)
     # removes a given item from the array, but only the item at the given position. so if i said removepos(brick,4,3) it would remove the brick which is located at x=4 y=3. if there was no brick at x=4 y=3, it would tell the user that there was no such thing at that location. If there were multiple bricks, it would remove the first one it found.
 ## addpos(thing,x,y)
     # adds a given item to a specific position in the array, e.g. if i say addpos(brick,4,3) it adds a brick to x=4 y=3, regardless of how empty that container is. 
@@ -25,45 +25,56 @@ import subprocess
 ## writetodbcoord(array,x,y)
     # overwrites a position in the database with another array.
 
-def getdbcc():
+def getdb():
     itemnames = []
     datafile = open("cc.txt","r")
     itemnames = ast.literal_eval(datafile.read())
     return itemnames
 
-def getdbcoordcc(x,y):
-    array = getdbcc()
+def getdbcoord(x,y):
+    array = getdb()
+    if x < 0 or y < 0:
+        return -1
+    if len(array) <= y:
+        return -1 
+    if len(array[y]) <= x:
+        return -1
     item = array[y][x]
     return item
 
-def writedbcc(array):
+def writedb(array):
     with open("cc.txt","w") as f:
         print(array, file=f)
 
-def writetodbcoordcc(array,x,y):
-    itemnames = getdbcc()
+def writetodbcoord(array,x,y):
+    itemnames = getdb()
+    if x < 0 or y < 0:
+        return -1
+    if len(itemnames) <= y:
+        return -1
+    if len(itemnames[y]) <= x:
+        return -1
     itemnames[y][x] = array
-    writedbcc(itemnames)
+    writedb(itemnames)
 
-def addposcc(thing,x,y):
-    currarry = getdbcordcc(x,y)
-    currarry.add(thing)
-    writetodbcoordcc(currarry,x,y)
+def addpos(thing,x,y):
+    currarry = getdbcoord(x,y)
+    currarry.append(thing)
+    writetodbcoord(currarry,x,y)
 
-def findemptiestcc():
-    itemnames = getdbcc()
+def findemptiest():
+    itemnames = getdb()
     min = 3030303
     mindex = (-1,-1)
-    for x in range(len(itemnames)):
-        for y in range(len(itemnames[x])):
-            if len(itemnames[x][y]) < min:
+    for y in range(len(itemnames)):
+        for x in range(len(itemnames[y])):
+            if len(itemnames[y][x]) < min:
                 mindex = (x,y)
-                min = len(itemnames[x][y])
+                min = len(itemnames[y][x])
     return mindex
 
-def searchcc(thing):
-    itemnames = getdbcc()
-    maybe = ""
+def search(thing):
+    itemnames = getdb()
     matches = []
     partial = []
     matchespos = []
@@ -84,9 +95,8 @@ def searchcc(thing):
                 partial.pop(i)
     return matches,partial,matchespos,partialpos
 
-def removecc(thing):
-    print(thing)
-    fullsearch = searchcc(thing)
+def remove(thing):
+    fullsearch = search(thing)
     matches = fullsearch[0]
     partial = fullsearch[1]
     matchespos = fullsearch[2]
@@ -101,61 +111,61 @@ def removecc(thing):
     else:
         return -1, -1
 
-    items = getdbcc()
-    print(thepos)
-    print(theval)
-    p1 = int(thepos[0])
-    p2 = int(thepos[1])
-    items[p2][p1].remove(theval)
-    writedbcc(items)
-    return p1, p2
+    items = getdb()
+    currarr = getdbcoord(thepos[0], thepos[1])
+    currarr.remove(theval)
+    writetodbcoord(currarr, thepos[0], thepos[1])
+    return thepos[0], thepos[1]
 
-def removeposcc(thing,x,y):
-    currarry = getdbcordcc(x,y)
+def removepos(thing,x,y):
+    currarry = getdbcord(x,y)
     currarry.remove(thing)
-    writetodbcoordcc(currarry,x,y)
+    writetodbcoord(currarry,x,y)
 
     
 
 
-def addcc(thing):
-    fullsearch = searchcc(thing)
-    print(fullsearch)
+def add(thing):
+    fullsearch = search(thing)
+    # print(fullsearch)
     matches = fullsearch[0]
     partial = fullsearch[1]
     matchespos = fullsearch[2]
     partialpos = fullsearch[3]
-    print('matches', matches)
-    print('partial', partial)
-    print('posmatches', matchespos)
-    print('pospartial', partialpos)
+    # print('matches', matches)
+    # print('partial', partial)
+    # print('posmatches', matchespos)
+    # print('pospartial', partialpos)
     thepos = "j"
 
     if thing in fullsearch[0]:
         theval = matches[0]
         thepos = matchespos[0]
+        # print('thinksmatch')
     elif partial != []:
         theval = partial[0]
         thepos = partialpos[0]
+        # print('thinkspartial')
     else:
-        thepose = findemptiestcc()
+        thepose = findemptiest()
+        # print("thinksempty")
 
     if thepos != "j":
-        print(thepos)
-        pos = getdbcoordcc(thepos[0], thepos[1])
-        print(pos)
+        # print(thepos)
+        pos = getdbcoord(thepos[0], thepos[1])
+        # print(pos)
         pos.append(thing)
-        print(pos)
-        writetodbcoordcc(pos,thepos[0],thepos[1])
+        # print(pos)
+        writetodbcoord(pos,thepos[0],thepos[1])
         return thepos[0], thepos[1]
     else:
-        print(thepose)
-        pos = getdbcoordcc(thepose[1], thepose[0])
-        print(pos)
+        # print(thepose)
+        pos = getdbcoord(thepose[0], thepose[1])
+        # print(pos)
         pos.append(thing)
-        print(pos)
-        writetodbcoordcc(pos,thepose[1],thepose[0])
-        return thepose[1], thepose[0]
+        # print(pos)
+        writetodbcoord(pos,thepose[0],thepose[1])
+        return thepose[0], thepose[1]
         
         
 

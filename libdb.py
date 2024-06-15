@@ -33,21 +33,42 @@ def getdb():
 
 def getdbcoord(x,y):
     array = getdb()
+    if x < 0 or y < 0:
+        return -1
+    if len(array) <= y:
+        return -1 
+    if len(array[y]) <= x:
+        return -1
     item = array[y][x]
     return item
 
 def writedb(array):
     with open("db.txt","w") as f:
-        print(itemnames, file=f)
+        print(array, file=f)
 
 def writetodbcoord(array,x,y):
     itemnames = getdb()
+    if x < 0 or y < 0:
+        return -1
+    if len(itemnames) <= y:
+        return -1
+    if len(itemnames[y]) <= x:
+        return -1
     itemnames[y][x] = array
     writedb(itemnames)
 
 def addpos(thing,x,y):
-    currarry = getdbcord(x,y)
-    currarry.add(thing)
+    itemnames = getdb()
+    currarry = getdbcoord(x,y)
+    if currarry == -1:
+        return -1
+    currarry.append(thing)
+    if x < 0 or y < 0:
+        return -1
+    if len(itemnames) <= y:
+        return -1
+    if len(itemnames[y]) <= x:
+        return -1
     writetodbcoord(currarry,x,y)
 
 def findemptiest():
@@ -57,20 +78,23 @@ def findemptiest():
     for y in range(len(itemnames)):
         for x in range(len(itemnames[y])):
             if len(itemnames[y][x]) < min:
+                # print(len(itemnames[y][x]))
+                # print(min)
+                # print(itemnames[y][x])
                 mindex = (y,x)
-                min = len(itemnames[y])
+                min = len(itemnames[y][x])
     return mindex
 
 def search(thing):
     itemnames = getdb()
-    maybe = (-1, -1, None)
+    maybe = (-1, -1, -1)
     for x in range(len(itemnames)):
         for y in range(len(itemnames[x])):
             for z in itemnames[x][y]:
                 if thing in z:
-                    maybe = (x,y,z)
+                    maybe = (y,x,z)
                 if thing == z:
-                    return (x,y,z)
+                    return (y,x,z)
                     # matches.append(z)
                     # matchespos.append((y,x))
     return maybe
@@ -78,30 +102,39 @@ def search(thing):
 
 def remove(thing):
     fullsearch = search(thing)
-    print(fullsearch)
     matches = fullsearch[0], fullsearch[1]
     # partial = fullsearch[1]
     # matchespos = fullsearch[2]
     # partialpos = fullsearch[3]
 
 
-    if thing == fullsearch[2]:
-        theval = fullsearch[2]
-    else:
+    if thing != fullsearch[2]:
         return -1, -1
+    theval = fullsearch[2]
 
     items = getdb()
     # print(thepos)
     # print(theval)
     p1 = int(matches[0])
     p2 = int(matches[1])
-    print(items[p1][p2])
-    items[p1][p2].remove(theval)
-    writedb(items)
+    coordarr = getdbcoord(p1,p2)
+    coordarr.remove(theval)
+    writetodbcoord(coordarr,p1,p2)
     return p1, p2
 
 def removepos(thing,x,y):
-    currarry = getdbcord(x,y)
+    currarry = getdbcoord(x,y)
+    itemnames = getdb()
+    if currarry == -1:
+        return -1
+    if x < 0 or y < 0:
+        return -1
+    if len(itemnames) <= y:
+        return -1
+    if len(itemnames[y]) <= x:
+        return -1
+    if thing not in currarry:
+        return -1
     currarry.remove(thing)
     writetodbcoord(currarry,x,y)
 
@@ -109,6 +142,10 @@ def removepos(thing,x,y):
 
 
 def add(thing):
+    # if(type(thing) != str):
+    #     return -1
+    if not isinstance(thing,str):
+        return -1
     fullsearch = search(thing)
     matches = fullsearch[0], fullsearch[1]
     # theval = fullsearch[2]
