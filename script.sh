@@ -1,6 +1,6 @@
 #!/bin/bash
 
-output_file="balls.txt"
+output_file="inputs.txt"
 
 # Make sure the output file is empty
 > "$output_file"

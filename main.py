@@ -16,7 +16,9 @@ while(True):
         time.sleep(1)
         continue
 
+
     action = ourcommand.split(" ")[0]
+    ledcontrol.turnalldark()
 
     if action == "clear":
         ledcontrol.turnalldark()
@@ -76,7 +78,7 @@ while(True):
             foundup = True
             onedone = True
         if found == False and foundup == False:
-            ledcontrol.turnalldark(False)
+            ledcontrol.turnalldark()
             subprocess.run(["espeak", "-v", "en", "item not found"], check=True)
         else:
             subprocess.run(["espeak", "-v", "en", "searched successfully"], check=True)
@@ -116,16 +118,16 @@ while(True):
     if action == "remove":
         conres = libdb.search(thing)
         concc = libdbcc.search(thing)
-        if conres[0] != -1:
-            toremove = conres 
-            pos = libdb.remove(thing)
-            ledcontrol.grid(pos[0],pos[1], 'red')
-            subprocess.run(["espeak", "-v", "en", "item terminated from containers"], check=True)
-        elif concc[0] != []:
+        if concc[0] != []:
             toremove = concc
             pos = libdbcc.remove(thing)
             ledcontrol.highlight(pos[0],pos[1], 'red')
             subprocess.run(["espeak", "-v", "en", "item terminated from card catalog"], check=True)
+        elif conres[0] != -1:
+            toremove = conres 
+            pos = libdb.remove(thing)
+            ledcontrol.grid(pos[0],pos[1], 'red')
+            subprocess.run(["espeak", "-v", "en", "item terminated from containers"], check=True)
         else:
             subprocess.run(["espeak", "-v", "en", "item not found"], check=True)
 

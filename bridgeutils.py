@@ -22,6 +22,7 @@ def getcommand(file_path):
     content = f.read()
     if content == "":
         return -1
+    content = content.lower()
 
     if "container" in content:
         index = content.find("container")
