@@ -20,10 +20,64 @@ while(True):
     action = ourcommand.split(" ")[0]
     ledcontrol.turnalldark()
 
+    undoflag = False
+
+    if action == "undo" or action == "reverse" or action == "fuck":
+        undoflag = True
+
+        file = open('flag.txt', 'r')
+        thelib = file.read().strip()
+        if thelib == 'libdbcc':
+            command = libdbcc.getlastcommand()
+            # parenidx = command.index('(')
+            # endidx = command.index(',ee ') + 4
+            # action = command[:command.index('(')]
+            # thing = command[parenidx:]
+            # thing = command[:endidx]
+            # thing = thing.strip()
+            # pos = command[endidx:-2]
+            action = command[:command.index('(')]
+            thing = command[command.index('(')+1:command.index(',ee ')]
+            thing = thing.strip()
+            pos = command[command.index(',ee ')+4:-2]
+            pos = tuple(map(int,pos.split(', ')))
+            if action == "addpos":
+                libdbcc.removepos(thing,pos[0],pos[1])
+                ledcontrol.highlight(pos[0],pos[1], 'red')
+                subprocess.run(["espeak", "-v", "en", "item terminated from card catalog"], check=True)
+            elif action == "removepos":
+                libdbcc.addpos(thing,pos[0],pos[1])
+                ledcontrol.highlight(pos[0],pos[1], 'green')
+                subprocess.run(["espeak", "-v", "en", "item added to card catalog"], check=True)
+            elif action == "search":
+                ledcontrol.turnalldark()
+        if thelib == 'libdb':
+            command = libdb.getlastcommand()
+            action = command[:command.index('(')]
+            thing = command[command.index('(')+1:command.index(',ee ')]
+            thing = thing.strip()
+            pos = command[command.index(',ee ')+4:-2]
+            pos = tuple(map(int,pos.split(', ')))
+            x = pos[0]
+            y = pos[1]
+            if action == "addpos":
+                pos = libdb.removepos(thing,pos[0],pos[1])
+                ledcontrol.grid(x, y, 'red')
+                subprocess.run(["espeak", "-v", "en", "item terminated from containers"], check=True)
+            elif action == "removepos":
+                pos = libdb.addpos(thing,pos[0],pos[1])
+                ledcontrol.grid(pos[0], pos[1], 'green')
+                subprocess.run(["espeak", "-v", "en", "item added to containers"], check=True)
+            elif action == "search":
+                ledcontrol.turnalldark()
+            # action = command
+
     if action == "clear":
         ledcontrol.turnalldark()
     
-    thing = ourcommand[ourcommand.index(action)+len(action):].strip()
+    if undoflag == False:
+        thing = ourcommand[ourcommand.index(action)+len(action):].strip()
+
     if thing == "esp 32":
         thing = "esp32"
 
@@ -32,6 +86,7 @@ while(True):
         continue
 
     bridgeutils.clearbridge(file_path)
+
 
     if action == "search":
         found = False
@@ -94,22 +149,32 @@ while(True):
         if currdb[0] == -1 and currdb[1] == -1 and curcc[0] == [] and curcc[1] == []:
             if len(conarr) < len(concc):
                 pos = libdb.add(thing)
+                cmdstring = 'addpos(' + thing + ',ee ' + str(pos[0]) + ', ' + str(pos[1]) + ')'
+                libdb.writecmd(cmdstring, 'cmdhistorylibdb.txt')
                 ledcontrol.grid(pos[0], pos[1])
                 subprocess.run(["espeak", "-v", "en", "item added to containers"], check=True)
             else:
                 pos = libdbcc.add(thing)
+                cmdstring = 'addpos(' + thing + ',ee ' + str(pos[0]) + ', ' + str(pos[1]) + ')'
+                libdbcc.writecmd(cmdstring, 'cmdhistorylibdbcc.txt')
                 ledcontrol.highlight(pos[0], pos[1])
                 subprocess.run(["espeak", "-v", "en", "item added to card catalog"], check=True)
         elif curcc[0] != []:
             pos = libdbcc.add(thing)
+            cmdstring = 'addpos(' + thing + ',ee ' + str(pos[0]) + ', ' + str(pos[1]) + ')'
+            libdbcc.writecmd(cmdstring, 'cmdhistorylibdbcc.txt')
             ledcontrol.highlight(pos[0], pos[1])
             subprocess.run(["espeak", "-v", "en", "item added to card catalog"], check=True)
         elif currdb[0] != -1:
             pos = libdb.add(thing)
+            cmdstring = 'addpos(' + thing + ',ee ' + str(pos[0]) + ', ' + str(pos[1]) + ')'
+            libdb.writecmd(cmdstring, 'cmdhistorylibdb.txt')
             ledcontrol.grid(pos[0], pos[1])
             subprocess.run(["espeak", "-v", "en", "item added to containers"], check=True)
         elif curcc[1] != []:
             pos = libdbcc.add(thing)
+            cmdstring = 'addpos(' + thing + ',ee ' + str(pos[0]) + ', ' + str(pos[1]) + ')'
+            libdbcc.writecmd(cmdstring, 'cmdhistorylibdbcc.txt')
             ledcontrol.highlight(pos[0], pos[1])
             subprocess.run(["espeak", "-v", "en", "item added to card catalog"], check=True)
 

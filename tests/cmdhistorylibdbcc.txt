@@ -1,0 +1,2 @@
+addpos(hello,ee 2, 1)
+addpos(screw,ee 1, 2)

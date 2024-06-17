@@ -42,6 +42,13 @@ def getdbcoord(x,y):
     item = array[y][x]
     return item
 
+def getlastcommand():
+    with open('cmdhistorylibdbcc.txt') as f:
+        for line in f:
+            pass
+        last_line = line
+        return last_line
+
 def writedb(array):
     with open("cc.txt","w") as f:
         print(array, file=f)
@@ -56,6 +63,12 @@ def writetodbcoord(array,x,y):
         return -1
     itemnames[y][x] = array
     writedb(itemnames)
+
+def writecmd(command, thefile):
+    with open(thefile,"a") as f:
+        print(command, file=f)
+    with open('flag.txt', 'w') as f:
+        print('libdbcc', file=f)
 
 def addpos(thing,x,y):
     currarry = getdbcoord(x,y)
@@ -118,7 +131,7 @@ def remove(thing):
     return thepos[0], thepos[1]
 
 def removepos(thing,x,y):
-    currarry = getdbcord(x,y)
+    currarry = getdbcoord(x,y)
     currarry.remove(thing)
     writetodbcoord(currarry,x,y)
 
