@@ -5,7 +5,7 @@ container is a tool for interaction with my storage system.
 
 It is built around a card catalog and one of those plastic bin organizers.
 
-[[/images/pic.jpg]]
+![image of my system](/images/pic.jpg)
 
 demo video:
 
