@@ -71,7 +71,8 @@ def turnallwhite(dark = "all"):
 # turnalldark()
 
 
-def changeid(id, color):
+# def changeid(id, color):
+def changeid(thelist, color):
     if color == "green":
         thecolor = [0,255,0]
     elif color == "red":
@@ -85,22 +86,33 @@ def changeid(id, color):
 
     url = "http://192.168.1.204/json/state"
     payload = {
-        "seg": [
-            {
-                "id": id,
-                "col": [
-                    # [0, 255, 0]
-                    thecolor
-                ]
-            }
-        ]
+        "seg": []
     }
+    for i in thelist:
+        payload["seg"].append({
+            "id": i,
+            "col": [
+                thecolor
+            ]
+        })
+
+    # payload = {
+    #     "seg": [
+    #         {
+    #             "id": id,
+    #             "col": [
+    #                 # [0, 255, 0]
+    #                 thecolor
+    #             ]
+    #         }
+    #     ]
+    # }
 
     headers = {
         'Content-Type': 'application/json'
     }
     response = requests.request("POST", url, headers=headers, data=json.dumps(payload))
-    print(response.text.encode('utf8'))
+    # print(response.text.encode('utf8'))
 
 
 
@@ -111,10 +123,10 @@ def grid(x, y, color="green"):
     # if ( x > )
         turnalldark()
         if y <= 3:
-            changeid(x,color)
-            changeid(y+9,color)
-            # changeid(x+9,color)
-            # changeid(y,color)
+            # changeid(x,color)
+            # changeid(y+9,color)
+            thelist = [x,y+9]
+            changeid(thelist, color)
         else:
             if x == 1:
                 x = 4 
@@ -124,11 +136,15 @@ def grid(x, y, color="green"):
             if x == 3:
                 y = 5
                 x = 4
-            changeid(y+9,color)
-            changeid(x,color)
-            changeid(x+1,color)
-            changeid(x+2,color)
-            changeid(x+3,color)
+
+            thelist = [y+9,x,x+1,x+2,x+3]
+            changeid(thelist, color)
+
+            # changeid(y+9,color)
+            # changeid(x,color)
+            # changeid(x+1,color)
+            # changeid(x+2,color)
+            # changeid(x+3,color)
 
 def highlight(x,y, color='green', found=True):
     if x == -1 and y == -1:
@@ -162,6 +178,7 @@ def highlight(x,y, color='green', found=True):
         if x == 2 and y == 3:
             id = 14
         id += 16
+        id = [id]
         changeid(id, color)
             
 

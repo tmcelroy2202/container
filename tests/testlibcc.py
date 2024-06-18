@@ -1,5 +1,7 @@
 import libdbcc
 import ast
+import time
+start_time = time.time()
 
 file = open("cc.txt.valid")
 contents = file.read()
@@ -296,3 +298,6 @@ if libdbcc.getdbcoord(0,1) != ['flash drive', 'flash drive', 'flash drive', 'fla
     print(matches)
 
 reset()
+
+end_time = time.time()
+print("num of seconds:", (end_time - start_time))

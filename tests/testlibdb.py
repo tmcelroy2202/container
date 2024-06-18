@@ -1,5 +1,8 @@
 import ast
 import libdb
+import time
+
+start_time = time.time()
 
 file = open("db.txt.valid")
 contents = file.read()
@@ -283,3 +286,5 @@ reset()
 # print(libdb.add(1030330))
 # print(libdb.search('1030330'))
 
+end_time = time.time()
+print("num of seconds:", (end_time - start_time))

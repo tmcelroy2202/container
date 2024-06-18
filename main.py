@@ -4,6 +4,7 @@ import ledcontrol
 import bridgeutils
 import time
 import subprocess
+import os
 
 while(True):
     file_path = "inputs.txt"
@@ -71,6 +72,69 @@ while(True):
             elif action == "search":
                 ledcontrol.turnalldark()
             # action = command
+    if action == "queue" or action == "next" or action == "manual" or action == "terminal":
+        taction = ourcommand.split(" ")[1]
+        thing = ourcommand[ourcommand.index(taction)+len(taction):]
+        ti_c = os.path.getctime('queuecoords.txt')
+        subprocess.run(["espeak", "-v", "en", "select a coordinate"], check=True)
+        ti_d = os.path.getctime('queuecoords.txt')
+        while ti_c == ti_d:
+            ti_d = os.path.getctime('queuecoords.txt')
+        file = open("queuecoords.txt", "r")
+        contents = file.read().strip()
+        pos = contents[contents.index("(")+1:contents.index(")")]
+        pos = tuple(map(int,pos.split(', ')))
+        library = contents[contents.index('l'):].strip()
+        # print(pos)
+        # print(library)
+        if library == "libdbcc":
+            if taction == "add":
+                libdbcc.addpos(thing,pos[0],pos[1])
+                ledcontrol.highlight(pos[0],pos[1], 'green')
+                subprocess.run(["espeak", "-v", "en", "item added to card catalog at your coordinate"], check=True)
+            if taction == "remove":
+                libdbcc.removepos(thing,pos[0],pos[1])
+                ledcontrol.highlight(pos[0],pos[1], 'red')
+                subprocess.run(["espeak", "-v", "en", "item terminated from card catalog at your coordinate"], check=True)
+            if taction == "query":
+                str = libdbcc.getdbcoord(pos[0], pos[1])[0]
+                for i in libdbcc.getdbcoord(pos[0], pos[1]):
+                    str += " and "
+                    str += i
+                # for i in libdbcc.getdbcoord(pos[0], pos[1]):
+                #     subprocess.run(["espeak", "-v", "en", i], check=True)
+                subprocess.run(["espeak", "-v", "en", str], check=True)
+                # subp
+                    # time.sleep(2)
+
+        if library == "libdb":
+            if taction == "add":
+                libdb.addpos(thing,pos[0],pos[1])
+                ledcontrol.grid(pos[0],pos[1], 'green')
+                subprocess.run(["espeak", "-v", "en", "item added to containers at your coordinate"], check=True)
+            if taction == "remove":
+                libdb.removepos(thing,pos[0],pos[1])
+                ledcontrol.grid(pos[0],pos[1], 'red')
+                subprocess.run(["espeak", "-v", "en", "item terminated from containers at your coordinate"], check=True)
+            if taction == "query":
+                str = libdb.getdbcoord(pos[0], pos[1])[0]
+                for i in libdb.getdbcoord(pos[0], pos[1]):
+                    str += " and "
+                    str += i
+                # for i in libdbcc.getdbcoord(pos[0], pos[1]):
+                #     subprocess.run(["espeak", "-v", "en", i], check=True)
+                subprocess.run(["espeak", "-v", "en", str], check=True)
+                # for i in libdb.getdbcoord(pos[0], pos[1]):
+                #     subprocess.run(["espeak", "-v", "en", i], check=True)
+                #     time.sleep(2)
+                    
+
+        thing = ""
+        action = ""
+
+        # if taction == "add" or taction == "plus" or taction == "insert" or taction == "ad":
+            
+
 
     if action == "clear":
         ledcontrol.turnalldark()
