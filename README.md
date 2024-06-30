@@ -18,8 +18,8 @@ container has a few core components:
 
 
 Requirements:
-  * Android Phone
-  * A device with network connectivity that can run python scripts
+  * Android Phone that can run termux
+  * A device with network connectivity that can run python scripts ( in my case, this is a old laptop running linux mint. )
   * LED strip
   * WLED controller ( in my case, an ESP32 )
   * Breadboard jumper wires
@@ -34,4 +34,5 @@ Similar projects:
   * https://orbitingprojects.blogspot.com/2012/05/light-it-up-component-organizer.html
   * https://www.youtube.com/watch?v=7C4i-2IqSS4
   * https://www.youtube.com/watch?v=7WAhquGQq3o
+
   my thoughts on these can be found here: https://notes.tommyhost.ing/Self/Storage-System/Problem-and-Idea#idea

@@ -1,0 +1,3 @@
+addpos(power blocker,ee 1, 0)
+addpos(power blocker,ee 1, 0)
+addpos(power blocker,ee 1, 0)

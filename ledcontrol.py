@@ -120,7 +120,6 @@ def grid(x, y, color="green"):
     if x == -1 and y == -1:
         turnalldark()
     else:
-    # if ( x > )
         turnalldark()
         if y <= 3:
             # changeid(x,color)

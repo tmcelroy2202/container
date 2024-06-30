@@ -18,6 +18,7 @@ while(True):
         continue
 
 
+
     action = ourcommand.split(" ")[0]
     ledcontrol.turnalldark()
 
@@ -138,6 +139,8 @@ while(True):
 
     if action == "clear":
         ledcontrol.turnalldark()
+        bridgeutils.clearbridge(file_path)
+        continue
     
     if undoflag == False:
         thing = ourcommand[ourcommand.index(action)+len(action):].strip()
