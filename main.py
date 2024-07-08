@@ -5,6 +5,21 @@ import bridgeutils
 import time
 import subprocess
 import os
+if os.path.isfile('env.txt'):
+    file = open("env.txt")
+    ip = file.readline()
+    hascc = file.readline()
+    hasdb = file.readline()
+    skipseg = file.readline()
+    skipseg = skipseg.split(',')
+    for i in skipseg:
+        i = i.strip()
+    skipseg[-1] = skipseg[-1].strip()
+    file.close()
+else:
+    print("please run setupenv.py before running this script.")
+    print("if you have already ran setupenv, and this message continues to pop up, manually create an env.txt in this folder, and report that as an issue on the github.")
+    exit()
 
 while(True):
     file_path = "inputs.txt"

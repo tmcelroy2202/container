@@ -1,3 +1,6 @@
 addpos(power blocker,ee 1, 0)
 addpos(power blocker,ee 1, 0)
 addpos(power blocker,ee 1, 0)
+addpos(power blocker,ee 1, 0)
+addpos(console cable,ee 2, 1)
+addpos(tile,ee 2, 1)

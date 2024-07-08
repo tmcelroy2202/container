@@ -2,10 +2,21 @@ import requests
 import json
 import sys
 
+file = open("env.txt")
+ip = file.readline()
+hascc = file.readline()
+hasdb = file.readline()
+skipseg = file.readline()
+skipseg = skipseg.split(',')
+for i in skipseg:
+    i = i.strip()
+skipseg[-1] = skipseg[-1].strip()
+file.close()
+
 
 def turnalldark(dark = "all"):
     numseg = 31
-    skipseg = [16,8]
+    # skipseg = [16,8]
     payload = {
         "seg": []
     }
@@ -28,7 +39,8 @@ def turnalldark(dark = "all"):
             })
 
     if dark != "none":
-        url = "http://192.168.1.204/json/state"
+        # url = "http://192.168.1.204/json/state"
+        url = ip
         headers = {
             'Content-Type': 'application/json'
         }
@@ -37,7 +49,7 @@ def turnalldark(dark = "all"):
 
 def turnallwhite(dark = "all"):
     numseg = 31
-    skipseg = [16,8]
+    # skipseg = [16,8]
     payload = {
         "seg": []
     }
@@ -60,7 +72,8 @@ def turnallwhite(dark = "all"):
             })
 
     if dark !="none":
-        url = "http://192.168.1.204/json/state"
+        # url = "http://192.168.1.204/json/state"
+        url = ip 
         headers = {
             'Content-Type': 'application/json'
         }
@@ -84,7 +97,8 @@ def changeid(thelist, color):
     else:
         thecolor = [0,255,0]
 
-    url = "http://192.168.1.204/json/state"
+    # url = "http://192.168.1.204/json/state"
+    url = ip 
     payload = {
         "seg": []
     }
