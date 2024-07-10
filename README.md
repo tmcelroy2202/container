@@ -29,6 +29,9 @@ Requirements:
 For a setup tutorial, see [setup.md](docs/setup.md)
 
 
+Please be aware that this is extremely WIP and much of it needs work. See [TODO.md](todo.md) for more info on just what im AWARE of being broken. Please report any bugs you find in the github issues, and if you can contribute ( code ) that would be greatly appreciated. If you wish to contribute, see [contributions.md](docs/contributions.md)
+
+
 Similar projects:
   * https://www.instructables.com/StorageBot-voice-controlled-robotic-parts-finder/
   * https://orbitingprojects.blogspot.com/2012/05/light-it-up-component-organizer.html
