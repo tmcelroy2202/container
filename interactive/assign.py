@@ -15,17 +15,13 @@ def goassign(width, height):
         while True:
             print(term.home + term.clear)
 
-            # Draw the grid
             draw_grid()
 
-            # Draw the cursor
             print(term.move_yx(cursor_y * 2, cursor_x * 4) + term.reverse(f"{grid[cursor_y][cursor_x]:<4}"))
 
-            # Display the instructions
             print(term.move_yx(height * 2 + 1, 0) + "Use arrow keys to navigate, type number and press 'Enter' to assign")
             print(term.move_yx(height * 2 + 2, 0) + "Press 'q' to quit")
 
-            # Handle input
             key = term.inkey()
 
             if key.code == term.KEY_RIGHT and cursor_x < width - 1:
@@ -39,7 +35,6 @@ def goassign(width, height):
             elif key == 'q':
                 break
             elif key.is_sequence and key.name == "KEY_ENTER":
-                # Prompt for input
                 print(term.move_yx(height * 2 + 3, 0) + "Enter a number (up to 3 digits): ")
                 user_input = ''
                 while True:
@@ -57,9 +52,8 @@ def goassign(width, height):
                     grid[cursor_y][cursor_x] = int(user_input)
                 else:
                     print(term.move_yx(height * 2 + 4, 0) + "Invalid input. Please enter a number between 0 and 999.")
-                    term.inkey(timeout=2)  # Wait for 2 seconds before continuing
+                    term.inkey(timeout=2)  
     
-    # Print the final grid
     return grid
 
 if __name__ == "__main__":
