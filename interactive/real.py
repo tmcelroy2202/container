@@ -1,4 +1,3 @@
-# import goassign from assign
 from assign import goassign
 from dimensions import getdimensions
 
