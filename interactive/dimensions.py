@@ -9,12 +9,10 @@ def getdimensions():
         while True:
             print(term.home + term.clear)
 
-            # Display the grid with clear separators
             for i in range(height+1):
                 for j in range(width):
                     print(term.move_yx(i * 2, j * 2) + 'X')
 
-            # Display the instructions
             print(term.move_yx(0, 0) + "Use arrow keys to expand/shrink width and height")
             print(term.move_yx(1, 0) + "Press 'Enter' to finalize dimensions")
 
@@ -29,10 +27,7 @@ def getdimensions():
             elif key.code == term.KEY_DOWN:
                 height += 1
             elif key == '\n':
-                # Clear the screen and print dimensions
                 print(term.home + term.clear)
-                # print(term.move_yx(0, 0) + f"Grid dimensions: {width}x{height}")
-                # term.inkey()  # Wait for another key press to exit
                 return width, height
 
 if __name__ == "__main__":
