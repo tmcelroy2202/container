@@ -89,10 +89,24 @@ Open inputs.txt and try to give an example input ( e.g. container add house ) to
 
 If things are working properly, then get out your android phone, and install termux on it. Preferably termux should be installed from F-Droid.
 
-Open termux up, and ssh into the device running the python script. You then want to cd to the directory you have this repository in, and run ./myscript.sh
+Open termux up, and ssh into the device running the python script. You then want to cd to the directory you have this repository in, and run ./myscript.sh. 
 
 Now, go to the google speech recognition keyboard, and try to give some input! ( e.g.  say aloud: container add house )
 
 If all went well, you should now have a working setup !
+
+I also like to edit my ~/.bashrc file on termux to automatically ssh into the device. For me that looks like this:
+
+```bash
+ssh -t tommy@192.168.2.214 "cd /home/tommy/container && ./script.sh ; bash --login"
+PROMPT_COMMAND+=bash
+```
+
+You will have to change the ip and username in that ssh command to be yours, and you will hvae to import the relevant ssh keys. there are a bunch of tutorials online for that, heres a good one https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/
+
+You should also be aware, that this will make it so you cannot access termux easily on that device. If you wish to access termux on that device, you can either:
+  1. hit ctrl + c to get into normal ssh instead of script.sh, then type "exit" to get out of ssh, then SPAM ctrl+c so it doesn't start a new ssh session. then you can edit your bashrc again to remove the command
+  2. take the ssh server offline ( probably by powering down the laptop ), so it cant connect to the thing, and then remove the stuff from your bashrc. 
+
 
 If you wish to understand more about how things work, Have a read through the rest of the contents of this folder ( docs )
