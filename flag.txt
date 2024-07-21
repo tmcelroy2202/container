@@ -1,1 +1,1 @@
-libdbcc
+libdb

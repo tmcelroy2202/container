@@ -11,6 +11,15 @@ demo video:
 
 container uses a voice control system to allow you to interact with and build a database of items inside your storage system. It allows you to search your database, and have LED lights show where that item is in real life. It also minimizes how much you have to think about it, by making it the default way you interact with your system. It was designed around the reality that if a system was at all annoying, I would never use it. If I had to remember to add something to my database after putting it in a drawer, I would just never do that. It would be too much work. container gets around this by managing your storage FOR you. Instead of you deciding where to put something, and logging where you put it, you just tell container you want to add something, and then container tells you where to put it, and automatically logs that you put it there. 
 
+Features:
+  * search for items and light up an LED light at the location of the item
+    * search can also show multiple items locations
+  * Add items and light up an LED light at the location where the item goes
+  * Remove items, and light up an LED light to indicate to the user where to remove the item from
+  * Toggle off all lights 
+  * 3 modes of interaction, voice ( e.g. saying "container add hdmi cable" into an android phone ), TUI (using the interactive.py script), and text ( appending to inputs.txt as if you were talking )
+
+
 container has a few core components:
   * An android device which runs the google speech keyboard to allow for voice input. SSHs into the server and runs a script on the server to allow it to take that voice input and write it to a file ( inputs.txt )
   * A server device, which parses all your voice input, hosts / interacts with the databases, and does the sending of requests to the wled instance

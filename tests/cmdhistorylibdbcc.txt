@@ -1,2 +1,6 @@
 addpos(hello,ee 2, 1)
 addpos(screw,ee 1, 2)
+addpos(house,ee 2, 1)
+addpos(house,ee 2, 1)
+addpos(house,ee 2, 1)
+removepos(house,ee 2, 1)

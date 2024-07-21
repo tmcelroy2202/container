@@ -78,12 +78,12 @@ while(True):
             x = pos[0]
             y = pos[1]
             if action == "addpos":
-                pos = libdb.removepos(thing,pos[0],pos[1])
+                pos = libdb.removepos(thing,x,y)
                 ledcontrol.grid(x, y, 'red')
                 subprocess.run(["espeak", "-v", "en", "item terminated from containers"], check=True)
             elif action == "removepos":
-                pos = libdb.addpos(thing,pos[0],pos[1])
-                ledcontrol.grid(pos[0], pos[1], 'green')
+                pos = libdb.addpos(thing,x,y)
+                ledcontrol.grid(x, y, 'green')
                 subprocess.run(["espeak", "-v", "en", "item added to containers"], check=True)
             elif action == "search":
                 ledcontrol.turnalldark()
@@ -268,11 +268,15 @@ while(True):
         if concc[0] != []:
             toremove = concc
             pos = libdbcc.remove(thing)
+            cmdstring = 'removepos(' + thing + ',ee ' + str(pos[0]) + ', ' + str(pos[1]) + ')'
+            libdbcc.writecmd(cmdstring, 'cmdhistorylibdbcc.txt')
             ledcontrol.highlight(pos[0],pos[1], 'red')
             subprocess.run(["espeak", "-v", "en", "item terminated from card catalog"], check=True)
         elif conres[0] != -1:
             toremove = conres 
             pos = libdb.remove(thing)
+            cmdstring = 'removepos(' + thing + ',ee ' + str(pos[0]) + ', ' + str(pos[1]) + ')'
+            libdb.writecmd(cmdstring, 'cmdhistorylibdb.txt')
             ledcontrol.grid(pos[0],pos[1], 'red')
             subprocess.run(["espeak", "-v", "en", "item terminated from containers"], check=True)
         else:

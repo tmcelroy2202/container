@@ -50,6 +50,8 @@ def getlastcommand():
         return last_line
 
 def writedb(array):
+    with open("db.txt.bak","w") as f:
+        print(getdb(), file=f)
     with open("db.txt","w") as f:
         print(array, file=f)
 

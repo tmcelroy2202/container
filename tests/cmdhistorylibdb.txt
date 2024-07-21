@@ -1,2 +1,8 @@
 addpos(screw,ee 5, 3)
 addpos(screw,ee 5, 3)
+addpos(screwdriver,ee 5, 3)
+addpos(screwdriver,ee 5, 3)
+removepos(screwdriver,ee 5, 3)
+removepos(screwdriver,ee 5, 3)
+removepos(screwdriver,ee 5, 3)
+addpos(screwdriver,ee 5, 3)
