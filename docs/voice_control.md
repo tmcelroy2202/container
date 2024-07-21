@@ -1,6 +1,6 @@
 You will see, in the demo video, that I am controlling the system by voice.
 
-It is super convenient, and I do not think I would be willing to use the system without it, but it DEFINITELY DOES NOT work first try every single time. There are a number of cases where things are problematic, for example:
+It is super convenient, and I do not think I would be willing to use the system without it, but it DEFINITELY DOES NOT work first try every single time. There are a number of cases where things are problematic, for example
 
 if i say "container add" it might interpret that as "container ad"
 if i say "esp32" it might interpret that as "esp 32"
