@@ -16,8 +16,8 @@ Features:
     * search can also show multiple items locations
   * Add items and light up an LED light at the location where the item goes
   * Remove items, and light up an LED light to indicate to the user where to remove the item from
-  * Toggle off all lights 
-  * 3 modes of interaction, voice ( e.g. saying "container add hdmi cable" into an android phone ), TUI (using the interactive.py script), and text ( appending to inputs.txt as if you were talking )
+  * Can toggle off all lights 
+  * Includes three modes of interaction, voice ( e.g. saying "container add hdmi cable" into an android phone ), TUI (using the interactive.py script), and text ( appending to inputs.txt as if you were talking )
 
 
 container has a few core components:
