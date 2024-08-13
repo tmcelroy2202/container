@@ -8,7 +8,7 @@ It is built around a card catalog and one of those plastic bin organizers.
 ![image of my system](/images/pic.jpg)
 
 demo video:
-<video src='https://sharex.tommyhost.ing/u/ygGHXf.mp4' width=180/>
+<video src='https://sharex.tommyhost.ing/u/ygGHXf.mp4' width=180/></video>
 
 container uses a voice control system to allow you to interact with and build a database of items inside your storage system. It allows you to search your database, and have LED lights show where that item is in real life. It also minimizes how much you have to think about it, by making it the default way you interact with your system. It was designed around the reality that if a system was at all annoying, I would never use it. If I had to remember to add something to my database after putting it in a drawer, I would just never do that. It would be too much work. container gets around this by managing your storage FOR you. Instead of you deciding where to put something, and logging where you put it, you just tell container you want to add something, and then container tells you where to put it, and automatically logs that you put it there. 
 
