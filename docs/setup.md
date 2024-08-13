@@ -102,7 +102,7 @@ ssh -t tommy@192.168.2.214 "cd /home/tommy/container && ./script.sh ; bash --log
 PROMPT_COMMAND+=bash
 ```
 
-You will have to change the ip and username in that ssh command to be yours, and you will hvae to import the relevant ssh keys. there are a bunch of tutorials online for that, heres a good one https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/
+You will have to change the ip and username in that ssh command to be yours, and you will have to import the relevant ssh keys. there are a bunch of tutorials online for that, heres a good one https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/
 
 You should also be aware, that this will make it so you cannot access termux easily on that device. If you wish to access termux on that device, you can either:
   1. hit ctrl + c to get into normal ssh instead of script.sh, then type "exit" to get out of ssh, then SPAM ctrl+c so it doesn't start a new ssh session. then you can edit your bashrc again to remove the command
