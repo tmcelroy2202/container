@@ -21,6 +21,6 @@ databased prints out (2,3) to show there is an item at x=2 y=3, and then led con
 
 in v2, i would like for the led controller to be directly called, via a function, in databased, so that i have more freedom on configuration without trying to use string slicing to approximate passing arguments, like i have been doing.
 
-I beleive I will still keep the bridge system, but I will make it do significantly less it will purely take content from balls.txt and call databased on that content 
+I believe I will still keep the bridge system, but I will make it do significantly less it will purely take content from balls.txt and call databased on that content 
 
 this does mean databased will become a much larger file, and maybe that should be taken into consideration. I might make a bunch of abstractions. I wanted to write a library version of databased, so that might happen.

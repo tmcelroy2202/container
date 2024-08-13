@@ -2,6 +2,7 @@
 
 * fix known bugs
   - whole database deleted on failure of any function that interacts with the database
+    - temporarily, have made it backup database before changes ( makes a .bak file and overwrites it on next change ) ( this is not a good solution. ) ( this would be easy to implement properly I just have not gotten around to it ) 
 * git commit on addition to database / other backup solution?
   - see if this could get me time added on items, as git would track that. im thinking just grepping through the git diff for first + containing the item name. would also work for time removed. I could also implement search history maybe. 
 * write tests for

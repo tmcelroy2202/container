@@ -38,7 +38,7 @@ Requirements:
 For a setup tutorial, see [setup.md](docs/setup.md)
 
 
-Please be aware that this is extremely WIP and much of it needs work. See [TODO.md](todo.md) for more info on just what im AWARE of being broken. Please report any bugs you find in the github issues, and if you can contribute ( code ) that would be greatly appreciated. If you wish to contribute, see [contributions.md](docs/contributions.md)
+Please be aware that this is extremely WIP. Much of it needs work, and much of the code is very ugly. One day it will be better. One day.  See [TODO.md](todo.md) for more info on just what im AWARE of being broken. Please report any bugs you find in the github issues, and if you can contribute ( code ) that would be greatly appreciated. If you wish to contribute, see [contributions.md](docs/contributions.md)
 
 
 Similar projects:
