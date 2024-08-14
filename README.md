@@ -48,5 +48,6 @@ Similar projects:
   * https://www.youtube.com/watch?v=7WAhquGQq3o
   * https://brightbin.io/
   * https://binner.io/
+  * https://youtube.com/watch?v=pl8bceZTroo
 
   my thoughts on these can be found here: https://notes.tommyhost.ing/Self/Storage-System/Problem-and-Idea#idea
