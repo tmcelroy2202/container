@@ -46,5 +46,7 @@ Similar projects:
   * https://orbitingprojects.blogspot.com/2012/05/light-it-up-component-organizer.html
   * https://www.youtube.com/watch?v=7C4i-2IqSS4
   * https://www.youtube.com/watch?v=7WAhquGQq3o
+  * https://brightbin.io/
+  * https://binner.io/
 
   my thoughts on these can be found here: https://notes.tommyhost.ing/Self/Storage-System/Problem-and-Idea#idea
